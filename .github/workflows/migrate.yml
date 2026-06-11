@@ -20,16 +20,22 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Install Liquibase
+      - name: Install Liquibase (safe)
         run: |
-          curl -sLO https://github.com/liquibase/liquibase/releases/download/v4.27.0/liquibase-4.27.0.tar.gz
-          tar -xzf liquibase-4.27.0.tar.gz
-          sudo mv liquibase-4.27.0 /opt/liquibase
+          set -e
 
-          echo "/opt/liquibase" >> $GITHUB_PATH
+          curl -L -o liquibase.tar.gz \
+            https://github.com/liquibase/liquibase/releases/download/v4.27.0/liquibase-4.27.0.tar.gz
 
-      - name: Verify Liquibase Install
-        run: liquibase --version
+          mkdir -p liquibase
+          tar -xzf liquibase.tar.gz -C liquibase
+
+          echo "$PWD/liquibase" >> $GITHUB_PATH
+
+      - name: Verify Liquibase
+        run: |
+          ls -R liquibase
+          liquibase --version
 
       - name: Run Liquibase Migration
         run: |
