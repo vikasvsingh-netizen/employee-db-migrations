@@ -24,8 +24,12 @@ jobs:
         run: |
           curl -sLO https://github.com/liquibase/liquibase/releases/download/v4.27.0/liquibase-4.27.0.tar.gz
           tar -xzf liquibase-4.27.0.tar.gz
-          sudo mv liquibase /opt/liquibase
+          sudo mv liquibase-4.27.0 /opt/liquibase
+
           echo "/opt/liquibase" >> $GITHUB_PATH
+
+      - name: Verify Liquibase Install
+        run: liquibase --version
 
       - name: Run Liquibase Migration
         run: |
