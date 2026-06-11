@@ -30,3 +30,5 @@ jobs:
           username: ${{ secrets.DEV_DB_USERNAME }}
           password: ${{ secrets.DEV_DB_PASSWORD }}
           classpath: "."
+        env:
+          JAVA_HOME: ${{ env.JAVA_HOME }}
