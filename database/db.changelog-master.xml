@@ -1,0 +1,15 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <include file="database/schema/TestDb/20226-06-09-vikas-createschema.xml"/>
+    <!--schema related changes shuold be at top then seed changes so if you alter tables and insert data insertion should happen succesfully-->
+    <includeAll path="database/schema/TestDb/tables"/>
+    <includeAll path="database/schema/TestDb/functions"/>
+
+    <!--data seeding should be after schema-->
+    <includeAll path="database/schema/TestDb/data"/>
+</databaseChangeLog>

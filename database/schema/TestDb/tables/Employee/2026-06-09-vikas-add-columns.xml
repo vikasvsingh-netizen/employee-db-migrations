@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+           http://www.liquibase.org/xml/ns/dbchangelog
+           https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <!-- Add new column: department -->
+    <changeSet id="002-add-department-column" author="vikas">
+        <addColumn tableName="Employee" schemaName="testdb">
+            <column name="department" type="VARCHAR(50)"/>
+        </addColumn>
+        <rollback>
+            <dropColumn tableName="Employee" columnName="department"/>
+        </rollback>
+    </changeSet>
+
+    <!-- Add new column: created_at -->
+    <changeSet id="003-add-created-at-column" author="vikas">
+        <addColumn tableName="Employee" schemaName="testdb">
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+        </addColumn>
+        <rollback>
+            <dropColumn tableName="Employee" columnName="created_at"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
