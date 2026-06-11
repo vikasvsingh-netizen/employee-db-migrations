@@ -1,0 +1,34 @@
+name: Database Migration
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - dev
+
+jobs:
+  migrate:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Install Liquibase
+        uses: liquibase-github-actions/update@v4.29.1
+        with:
+          operation: update
+          classpath: ""
+
+        env:
+          DB_URL: ${{ secrets.DEV_DB_URL }}
+          DB_USERNAME: ${{ secrets.DEV_DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DEV_DB_PASSWORD }}
