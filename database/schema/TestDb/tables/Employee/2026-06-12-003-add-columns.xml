@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="004-add-columns" author="vikas">
+
+        <addColumn schemaName="testdb" tableName="employee">
+            <column name="joining_date" type="DATE"/>
+            <column name="location" type="VARCHAR(100)"/>
+            <column name="employment_type" type="VARCHAR(20)" defaultValue="FULL_TIME"/>
+        </addColumn>
+
+    </changeSet>
+
+</databaseChangeLog>
