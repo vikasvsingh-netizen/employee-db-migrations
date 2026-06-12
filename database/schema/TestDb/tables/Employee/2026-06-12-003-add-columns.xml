@@ -6,7 +6,7 @@
 
     <changeSet id="004-add-columns" author="vikas">
 
-        <addColumn schemaName="testdb" tableName="employee">
+        <addColumn tableName="Employee" schemaName="testdb">
             <column name="joining_date" type="DATE"/>
             <column name="location" type="VARCHAR(100)"/>
             <column name="employment_type" type="VARCHAR(20)" defaultValue="FULL_TIME"/>
