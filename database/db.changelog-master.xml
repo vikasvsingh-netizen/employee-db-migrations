@@ -7,7 +7,6 @@
 
     <include file="database/schema/TestDb/20226-06-09-vikas-createschema.xml"/>
     <!--schema related changes shuold be at top then seed changes so if you alter tables and insert data insertion should happen succesfully-->
-    <includeAll path="database/schema/TestDb/20226-06-09-vikas-createschema.xml"/>
     <includeAll path="database/schema/TestDb/tables"/>
     <includeAll path="database/schema/TestDb/functions"/>
 
