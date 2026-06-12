@@ -2,9 +2,6 @@ name: Database Migration
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - dev
 
 jobs:
   migrate:
@@ -20,7 +17,7 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Install Liquibase (safe)
+      - name: Install Liquibase
         run: |
           set -e
 
@@ -33,11 +30,9 @@ jobs:
           echo "$PWD/liquibase" >> $GITHUB_PATH
 
       - name: Verify Liquibase
-        run: |
-          ls -R liquibase
-          liquibase --version
+        run: liquibase --version
 
-      - name: Run Liquibase Migration
+      - name: Run Migration
         run: |
           liquibase \
             --changeLogFile=database/db.changelog-master.xml \
