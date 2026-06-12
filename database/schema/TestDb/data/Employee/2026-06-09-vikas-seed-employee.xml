@@ -29,6 +29,11 @@
             <column name="department" value="HR"/>
         </insert>
 
+        <!-- Rollback -->
+        <rollback>
+            DELETE FROM testdb.Employee WHERE empid IN (1, 2);
+        </rollback>
+
     </changeSet>
 
 </databaseChangeLog>

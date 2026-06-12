@@ -8,10 +8,13 @@
            https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
     <!-- Create Schema -->
-    <changeSet id="001-create-schema" author="chatgpt">
+    <changeSet id="001-create-schema" author="Vikas">
         <sql>
             CREATE SCHEMA IF NOT EXISTS testdb;
         </sql>
+        <rollback>
+            DROP SCHEMA IF EXISTS testdb;
+        </rollback>
     </changeSet> 
 
 </databaseChangeLog>

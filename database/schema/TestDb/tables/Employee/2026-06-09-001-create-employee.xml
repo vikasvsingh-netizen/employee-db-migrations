@@ -9,6 +9,7 @@
 
     <!-- Create Employee Table -->
     <changeSet id="001-create-employee-table" author="chatgpt">
+
         <createTable schemaName="testdb" tableName="Employee">
 
             <column name="empid" type="BIGINT">
@@ -33,6 +34,12 @@
             </column>
 
         </createTable>
+
+        <!-- Rollback -->
+        <rollback>
+            <dropTable schemaName="testdb" tableName="Employee"/>
+        </rollback>
+
     </changeSet>
 
 </databaseChangeLog>
