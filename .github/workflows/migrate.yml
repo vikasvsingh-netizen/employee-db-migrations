@@ -1,0 +1,42 @@
+name: Database Migration
+
+on:
+  workflow_dispatch:
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Install Liquibase
+        run: |
+          set -e
+
+          curl -L -o liquibase.tar.gz \
+            https://github.com/liquibase/liquibase/releases/download/v4.27.0/liquibase-4.27.0.tar.gz
+
+          mkdir -p liquibase
+          tar -xzf liquibase.tar.gz -C liquibase
+
+          echo "$PWD/liquibase" >> $GITHUB_PATH
+
+      - name: Verify Liquibase
+        run: liquibase --version
+
+      - name: Run Migration
+        run: |
+          liquibase \
+            --changeLogFile=database/db.changelog-master.xml \
+            --url="${{ secrets.DEV_DB_URL }}" \
+            --username="${{ secrets.DEV_DB_USERNAME }}" \
+            --password="${{ secrets.DEV_DB_PASSWORD }}" \
+            update
